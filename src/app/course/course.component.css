@@ -10,13 +10,13 @@
   display: block;
 }
 
+mat-cell, mat-footer-cell, mat-header-cell {
+  justify-content: center;
+}
+
 .description-cell {
   text-align: left;
   margin: 10px auto;
-}
-
-.duration-cell {
-  text-align: center;
 }
 
 .duration-cell mat-icon {
@@ -33,6 +33,7 @@
 
 .lessons-table {
   min-height: 360px;
+  margin-top: 10px;
 }
 
 .spinner-container mat-spinner {

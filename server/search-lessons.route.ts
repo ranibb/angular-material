@@ -14,7 +14,8 @@ export function searchLessons(req: Request, res: Response) {
   // tslint:disable-next-line: radix
   const pageSize = parseInt(queryParams.pageSize);
 
-  let lessons = Object.values(LESSONS).filter(lesson => lesson.courseId === courseId).sort((l1, l2) => l1.id - l2.id);
+  // tslint:disable-next-line: triple-equals
+  let lessons = Object.values(LESSONS).filter(lesson => lesson.courseId == courseId).sort((l1, l2) => l1.id - l2.id);
 
   if (filter) {
     lessons = lessons.filter(lesson => lesson.description.trim().toLowerCase().search(filter.toLowerCase()) >= 0);
