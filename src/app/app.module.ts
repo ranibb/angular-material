@@ -11,35 +11,55 @@ import { MatCardModule } from '@angular/material/card';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { TopMenuComponent } from './top-menu/top-menu.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { CourseComponent } from './course/course.component';
+import {
+  MatInputModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
+import { CoursesService } from './services/courses.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CourseResolver } from './services/course.resolver';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-        TopMenuComponent,
-        CoursesCardListComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatTabsModule,
-        AppRoutingModule,
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    CourseComponent,
+    CoursesCardListComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatTabsModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    AppRoutingModule,
+
+  ],
+  providers: [
+    CoursesService,
+    CourseResolver
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
