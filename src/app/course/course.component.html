@@ -12,7 +12,7 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="seqNo" matSortDirection="asc" matSortDisableClear>
 
     <ng-container matColumnDef="seqNo">
       <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
