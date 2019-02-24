@@ -38,6 +38,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); // send us back to the first page
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         tap(() => {
