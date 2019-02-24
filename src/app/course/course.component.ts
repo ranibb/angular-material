@@ -5,7 +5,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { LessonsDatasource } from '../services/lessons.datasource';
-import { startWith } from 'rxjs/operators';
+import { startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'course',
@@ -35,11 +35,12 @@ export class CourseComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.paginator.page
       .pipe(
-        startWith(null) // to trigger the call to load lessons
+        startWith(null), // to trigger the call to load lessons
+        tap(() => {
+          this.dataSource.loadLessons(this.course.id, '', 'asc', this.paginator.pageIndex, this.paginator.pageSize);
+        })
       )
-      .subscribe(() => {
-        this.dataSource.loadLessons(this.course.id, '', 'asc', this.paginator.pageIndex, this.paginator.pageSize);
-      });
+      .subscribe();
   }
 
 }
