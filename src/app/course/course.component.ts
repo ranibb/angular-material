@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material';
 
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
+import { LessonsDatasource } from '../services/lessons.datasource';
 
 @Component({
   selector: 'course',
@@ -14,7 +15,7 @@ export class CourseComponent implements OnInit, AfterViewInit {
 
   course: Course;
 
-  dataSource = new MatTableDataSource([]);
+  dataSource: LessonsDatasource;
 
   displayedColumns = ['seqNo', 'description', 'duration'];
 
@@ -25,12 +26,9 @@ export class CourseComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.course = this.route.snapshot.data.course;
 
-    this.coursesService.findAllCourseLessons(this.course.id)
-      .subscribe(lessons => this.dataSource.data = lessons);
-  }
+    this.dataSource = new LessonsDatasource(this.coursesService);
 
-  searchLessons(search = '') {
-    this.dataSource.filter = search.toLowerCase().trim();
+    this.dataSource.loadLessons(this.course.id, '', 'asc', 0, 3);
   }
 
   ngAfterViewInit() { }
