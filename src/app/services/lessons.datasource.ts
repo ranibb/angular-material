@@ -1,6 +1,6 @@
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 
 import { Lesson } from '../model/lesson';
 import { CoursesService } from './courses.service';
@@ -9,6 +9,10 @@ import { CoursesService } from './courses.service';
 export class LessonsDatasource implements DataSource<Lesson> {
 
   private lessonsSubject = new BehaviorSubject<Lesson[]>([]);
+
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+
+  public loading$ = this.loadingSubject.asObservable();
 
   constructor(private courseService: CoursesService) {
 
@@ -20,9 +24,11 @@ export class LessonsDatasource implements DataSource<Lesson> {
     sortDirection: string,
     pageIndex: number,
     pageSize: number) {
+      this.loadingSubject.next(true);
       this.courseService.findLessons(courseId, filter, sortDirection, pageIndex, pageSize)
         .pipe(
-          catchError(() => of([]))
+          catchError(() => of([])),
+          finalize(() => this.loadingSubject.next(false))
         )
         .subscribe(lessons => this.lessonsSubject.next(lessons));
   }
@@ -33,5 +39,6 @@ export class LessonsDatasource implements DataSource<Lesson> {
 
   disconnect(collectionViewer: CollectionViewer): void {
     this.lessonsSubject.complete();
+    this.loadingSubject.complete();
   }
 }
