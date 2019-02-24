@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { LessonsDatasource } from '../services/lessons.datasource';
 import { startWith, tap } from 'rxjs/operators';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'course',
@@ -23,6 +24,9 @@ export class CourseComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
 
+  @ViewChild(MatSort)
+  sort: MatSort;
+
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService) { }
@@ -34,10 +38,10 @@ export class CourseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.paginator.page
+    merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         tap(() => {
-          this.dataSource.loadLessons(this.course.id, '', 'asc', this.paginator.pageIndex, this.paginator.pageSize);
+          this.dataSource.loadLessons(this.course.id, '', this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
         })
       )
       .subscribe();
