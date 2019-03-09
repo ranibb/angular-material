@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -23,7 +24,9 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule,
+  MatDatepickerModule
 } from '@angular/material';
 import { CoursesService } from './services/courses.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -53,12 +56,15 @@ import { CourseDialogComponent } from './course-dialog/course-dialog.component';
     MatListModule,
     MatToolbarModule,
     MatInputModule,
+    MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   providers: [
     CoursesService,
