@@ -15,8 +15,12 @@
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #myDatepicker></mat-datepicker>
   </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description" formControlName="longDescription"></textarea>
+  </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
+  <button (click)="save()" class="mat-raised-button mat-primary">Save</button>
   <button (click)="close()" class="mat-raised-button">Close</button>
 </mat-dialog-actions>
