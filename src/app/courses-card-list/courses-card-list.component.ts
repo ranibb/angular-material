@@ -21,10 +21,10 @@ export class CoursesCardListComponent implements OnInit {
   // We are distructuring the course parameters that we are reveving here ()
   editCourse({ description, longDescription, category }: Course) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    dialogConfig.disableClose = true; // prevents closing the dialog when clicking outside the dialog
     dialogConfig.data = {
       description, longDescription, category
-    }
+    };
     this.dialog.open(CourseDialogComponent, dialogConfig);
   }
 
