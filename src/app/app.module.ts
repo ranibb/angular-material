@@ -21,11 +21,13 @@ import {
   MatSidenavModule,
   MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatDialogModule
 } from '@angular/material';
 import { CoursesService } from './services/courses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CourseResolver } from './services/course.resolver';
+import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { CourseResolver } from './services/course.resolver';
     HomeComponent,
     AboutComponent,
     CourseComponent,
-    CoursesCardListComponent
+    CoursesCardListComponent,
+    CourseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,13 +56,14 @@ import { CourseResolver } from './services/course.resolver';
     MatSortModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-
+    MatDialogModule
   ],
   providers: [
     CoursesService,
     CourseResolver
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CourseDialogComponent]
 })
 export class AppModule {
 }
