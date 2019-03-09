@@ -22,6 +22,7 @@ export class CoursesCardListComponent implements OnInit {
   editCourse({ description, longDescription, category }: Course) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; // prevents closing the dialog when clicking outside the dialog
+    dialogConfig.autoFocus = true;
     dialogConfig.data = {
       description, longDescription, category
     };
